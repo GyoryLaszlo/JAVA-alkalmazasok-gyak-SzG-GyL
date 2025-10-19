@@ -1,0 +1,70 @@
+<!-- About-->
+<section th:fragment="content" class="page-section bg-primary" id="about">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="text-white mt-0"Notebookok</h2>
+                <hr class="divider divider-light" />
+                <p class="text-white-75 mb-4">Itt a notebookok adatbázisból jelennek meg</p>
+
+                <!--<a class="btn btn-light btn-xl" href="#services">Get Started!</a>-->
+            </div>
+        </div>
+        <div class="table-wrap">
+            <div class="table-scroll">
+                <table class="table table-modern table-striped align-middle mb-0">
+
+                    <!-- (meglévő colgroup maradhat, de lásd még a CSS-t) -->
+                    <colgroup>
+                        <col class="col-gyarto">
+                        <col class="col-tipus">
+                        <col class="col-kijelzo">
+                        <col class="col-memoria">
+                        <col class="col-hdd">
+                        <col class="col-vga">
+                        <col class="col-ar">
+                        <col class="col-proc">
+                        <col class="col-os">
+                        <col class="col-db">
+                    </colgroup>
+
+                <thead>
+                <tr>
+                    <th>Gyártó</th>
+                    <th>Típus</th>
+                    <th class="num">Kijelző</th>
+                    <th class="num">Memória</th>
+                    <th class="num">HDD</th>
+                    <th>VGA</th>
+                    <th class="num">Ár</th>
+                    <th>Processzor</th>
+                    <th>OS</th>
+                    <th class="num">Db</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="g : ${lista}">
+                    <td class="fw-semibold" th:text="${g.gyarto}"></td>
+                    <td th:text="${g.tipus}"></td>
+                    <td class="num" th:text="|${g.kijelzo}”|">15.6”</td>
+                    <td class="num" th:text="|${g.memoria} MB|">2048 MB</td>
+                    <td class="num" th:text="|${g.merevlemez} GB|">320 GB</td>
+                    <td class="trunc" th:title="${g.videovezerlo}" th:text="${g.videovezerlo}">Intel…</td>
+                    <td class="num fw-semibold" th:text="|${g.ar} Ft|">95 120 Ft</td>
+                    <td>
+                        <span class="chip solid me-1" th:text="${g.processzor.gyarto}">Intel</span>
+                        <span class="chip" th:text="${g.processzor.tipus}">Celeron 900</span>
+                    </td>
+                    <td><span class="chip" th:text="${g.oprendszer.nev}">FreeDOS</span></td>
+                    <td class="num" th:text="${g.dbMennyiseg}">1</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+
+
+
+    </div>
+</section>
