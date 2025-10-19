@@ -17,13 +17,37 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/css/**", "/js/**", "/assets/**", "/webjars/**").permitAll()
+                .requestMatchers("/", "/database", "/messages", "/chart","/crud", "/restful","/admin", "/contact",
+                                "/css/**", "/js/**", "/assets/**", "/webjars/**").permitAll()
+                .requestMatchers("/login", "/register").permitAll()
                 .anyRequest().authenticated()
-
+        ).formLogin(f -> f
+                .loginPage("/login")
+                .defaultSuccessUrl("/", true)
+                .permitAll()
+        ).logout(l -> l
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/?logout")
+                .permitAll()
         );
 
         return http.build();
     }
 
+    @Bean
+    public UserDetailsService userDetailsService(DataSource dataSource) {
+        JdbcUserDetailsManager jdbc = new JdbcUserDetailsManager(dataSource);
+        jdbc.setUsersByUsernameQuery(
+                "select username, password, enabled from javagyak.users where username = ?"
+        );
+        jdbc.setAuthoritiesByUsernameQuery(
+                "select username, authority from javagyak.authorities where username = ?"
+        );
+        return jdbc;
+    }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
