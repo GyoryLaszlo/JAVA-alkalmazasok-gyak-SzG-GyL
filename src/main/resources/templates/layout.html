@@ -42,7 +42,7 @@
             </a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item" sec:authorize="hasAnyRole('ADMIN','USER')">
             <a class="nav-link"
                th:href="@{/messages}"
                th:attr="hx-get=@{/messages}, hx-target='#content', hx-push-url='true'">
