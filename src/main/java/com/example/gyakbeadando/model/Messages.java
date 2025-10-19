@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Digits;
 public class Messages {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;                // ezt a DB generálja
+    private Integer id;                // ezt a DB generálja
 
     @Column(length = 100)
     private String fullname;
@@ -20,11 +20,11 @@ public class Messages {
     protected Messages() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
