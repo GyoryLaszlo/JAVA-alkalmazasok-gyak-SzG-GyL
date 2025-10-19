@@ -1,16 +1,8 @@
 package com.example.gyakbeadando.model;
 
-import com.example.gyakbeadando.repo.ContactRepository;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 @Entity
 public class Contact {

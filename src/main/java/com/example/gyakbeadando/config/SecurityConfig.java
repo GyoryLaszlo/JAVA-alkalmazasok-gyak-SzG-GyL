@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
@@ -18,7 +19,7 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/database", "/chart","/crud", "/restful", "/contact",
+                .requestMatchers("/", "/database", "/chart","/crud", "/restful", "/contact", "/register",
                                 "/css/**", "/js/**", "/assets/**", "/webjars/**").permitAll()
                 .requestMatchers("/login", "/register").permitAll()
                 .requestMatchers(HttpMethod.GET,  "/contact").permitAll()
@@ -38,6 +39,19 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+    @Bean
+    public UserDetailsManager userDetailsManager(DataSource dataSource) {
+        JdbcUserDetailsManager jdbc = new JdbcUserDetailsManager(dataSource);
+        jdbc.setUsersByUsernameQuery(
+                "select username, password, enabled from javagyak.users where username = ?"
+        );
+        jdbc.setAuthoritiesByUsernameQuery(
+                "select username, authority from javagyak.authorities where username = ?"
+        );
+        return jdbc; // <- UserDetailsManager
+    }
+
 
     @Bean
     public UserDetailsService userDetailsService(DataSource dataSource) {

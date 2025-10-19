@@ -4,22 +4,38 @@ import com.example.gyakbeadando.model.Contact;
 import com.example.gyakbeadando.repo.ContactRepository;
 import com.example.gyakbeadando.repo.GepRepository;
 import jakarta.validation.Valid;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.example.gyakbeadando.model.RegisterForm;
+
+
+import java.util.HashMap;
 
 @Controller
 public class PageController {
 
     private final GepRepository gepRepository;
     private final ContactRepository contactRepository;   // ← kisbetűs mező
+    private final UserDetailsManager userDetailsManager;
+    private final PasswordEncoder passwordEncoder;
 
     public PageController(GepRepository gepRepository,
-                          ContactRepository contactRepository) {
+                          ContactRepository contactRepository,
+                          UserDetailsManager userDetailsManager,
+                          UserDetailsService userDetailsService,
+                          PasswordEncoder passwordEncoder) {
         this.gepRepository = gepRepository;
         this.contactRepository = contactRepository;
+        this.userDetailsManager = userDetailsManager;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/")
@@ -73,6 +89,53 @@ public class PageController {
         return "redirect:/contact";
     }
 
+    @GetMapping("/register")
+    public String register(@RequestHeader(value="HX-Request", required=false) String hx,
+                           Model model) {
+        if (!model.containsAttribute("form")) model.addAttribute("form", new RegisterForm());
+        if (hx != null) return "fragments/register :: content";
+        model.addAttribute("view", "fragments/register");
+        return "layout";
+    }
+
+    @PostMapping("/register")
+    public String doRegister(@RequestHeader(value="HX-Request", required=false) String hx,
+                             @Valid @ModelAttribute("form") RegisterForm form,
+                             BindingResult br,
+                             Model model,
+                             RedirectAttributes ra) {
+
+        // jelszó egyezés
+        if (!br.hasErrors() && !form.getPassword().equals(form.getConfirmPassword())) {
+            br.rejectValue("confirmPassword", "pw.mismatch", "A két jelszó nem egyezik");
+        }
+
+        // névfoglaltság
+        if (!br.hasErrors() && userDetailsManager.userExists(form.getUsername())) {
+            br.rejectValue("username", "username.exists", "Ez a felhasználónév már foglalt");
+        }
+
+        if (br.hasErrors()) {
+            if (hx != null) return "fragments/register :: content";
+            model.addAttribute("view", "fragments/register");
+            return "layout";
+        }
+
+        // létrehozás
+        UserDetails user = User.withUsername(form.getUsername())
+                .password(passwordEncoder.encode(form.getPassword()))
+                .roles("USER") // vagy authorities(...), ha authorities táblát használsz
+                .build();
+        userDetailsManager.createUser(user);
+
+        if (hx != null) {
+            model.addAttribute("ok", true);
+            model.addAttribute("form", new RegisterForm());
+            return "fragments/register :: content";
+        }
+        ra.addFlashAttribute("ok", true);
+        return "redirect:/register";
+    }
 
     // --- a többi oldal maradhat így ---
     @GetMapping("/messages")
@@ -104,6 +167,12 @@ public class PageController {
     public String login(@RequestHeader(value = "HX-Request", required = false) String hx) {
         return (hx != null) ? "fragments/login :: content" : "layout";
     }
+
+    /*public String register(@RequestHeader(value = "HX-Request", required = false) String hx) {
+        return (hx != null) ? "fragments/register :: content" : "layout";
+    }*/
+
+
 
 
 }
