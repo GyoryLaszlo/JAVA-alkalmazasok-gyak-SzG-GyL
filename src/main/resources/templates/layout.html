@@ -102,7 +102,7 @@
 </nav>
 
 <!-- IDE kerül minden aloldal tartalma -->
-<main id="content">
+<main id="content" th:insert="${view} ?: ~{fragments/home :: content}">
     <!-- első betöltéskor szerver oldalon beillesztjük a home-ot -->
     <div  th:replace="${view} != null ? ~{${view} :: content} : ~{fragments/home :: content}"></div>
     <!--<div th:replace="~{fragments/home :: content}"></div>-->

@@ -38,6 +38,17 @@ public class PageController {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /*@GetMapping("/login")
+    public String login(@RequestHeader(value="HX-Request", required=false) String hx,
+                        @RequestParam(value="error", required=false) String error,
+                        @RequestParam(value="logout", required=false) String logout,
+                        Model model) {
+        if (error != null)  model.addAttribute("loginError", true);
+        if (logout != null) model.addAttribute("loggedOut", true);
+        return (hx != null) ? "fragments/login :: content" : "layout";
+    }*/
+
+
     @GetMapping("/")
     public String home(@RequestHeader(value = "HX-Request", required = false) String hx) {
         return (hx != null) ? "fragments/home :: content" : "layout";
@@ -96,6 +107,7 @@ public class PageController {
         if (hx != null) return "fragments/register :: content";
         model.addAttribute("view", "fragments/register");
         return "layout";
+
     }
 
     @PostMapping("/register")
@@ -167,7 +179,6 @@ public class PageController {
     public String login(@RequestHeader(value = "HX-Request", required = false) String hx) {
         return (hx != null) ? "fragments/login :: content" : "layout";
     }
-
     /*public String register(@RequestHeader(value = "HX-Request", required = false) String hx) {
         return (hx != null) ? "fragments/register :: content" : "layout";
     }*/

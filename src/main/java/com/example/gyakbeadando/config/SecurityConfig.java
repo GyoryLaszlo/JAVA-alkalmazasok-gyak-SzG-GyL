@@ -20,7 +20,7 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/", "/database", "/chart","/crud", "/restful", "/contact", "/register",
-                                "/css/**", "/js/**", "/assets/**", "/webjars/**").permitAll()
+                        "/css/**", "/js/**", "/assets/**", "/webjars/**").permitAll()
                 .requestMatchers("/login", "/register").permitAll()
                 .requestMatchers(HttpMethod.GET,  "/contact").permitAll()
                 .requestMatchers(HttpMethod.POST, "/contact").permitAll()
@@ -53,17 +53,7 @@ public class SecurityConfig {
     }
 
 
-    @Bean
-    public UserDetailsService userDetailsService(DataSource dataSource) {
-        JdbcUserDetailsManager jdbc = new JdbcUserDetailsManager(dataSource);
-        jdbc.setUsersByUsernameQuery(
-                "select username, password, enabled from javagyak.users where username = ?"
-        );
-        jdbc.setAuthoritiesByUsernameQuery(
-                "select username, authority from javagyak.authorities where username = ?"
-        );
-        return jdbc;
-    }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

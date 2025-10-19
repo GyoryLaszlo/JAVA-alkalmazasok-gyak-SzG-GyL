@@ -113,7 +113,7 @@ public class BootstrapData {
 
     private BufferedReader open(ApplicationContext ctx, String location) throws IOException {
         Resource r = ctx.getResource(location);
-        System.out.println("Loading resource: " + location + " | exists=" + r.exists() + " | filename=" + r.getFilename());
+        //System.out.println("Loading resource: " + location + " | exists=" + r.exists() + " | filename=" + r.getFilename());
         if (!r.exists()) {
             throw new FileNotFoundException("Nem találom: " + location + " (tedd ide: src/main/resources/data/...)");
         }
