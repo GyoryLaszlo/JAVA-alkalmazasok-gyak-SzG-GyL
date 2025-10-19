@@ -2,6 +2,7 @@ package com.example.gyakbeadando.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,6 +21,8 @@ public class SecurityConfig {
                 .requestMatchers("/", "/database", "/chart","/crud", "/restful", "/contact",
                                 "/css/**", "/js/**", "/assets/**", "/webjars/**").permitAll()
                 .requestMatchers("/login", "/register").permitAll()
+                .requestMatchers(HttpMethod.GET,  "/contact").permitAll()
+                .requestMatchers(HttpMethod.POST, "/contact").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/messages/**").hasAnyRole("ADMIN","USER")
                 .anyRequest().authenticated()

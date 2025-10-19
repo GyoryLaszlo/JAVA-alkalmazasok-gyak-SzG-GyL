@@ -1,58 +1,109 @@
 package com.example.gyakbeadando.controller;
 
+import com.example.gyakbeadando.model.Contact;
+import com.example.gyakbeadando.repo.ContactRepository;
 import com.example.gyakbeadando.repo.GepRepository;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class PageController {
 
-        @GetMapping("/")
-        public String home(@RequestHeader(value="HX-Request", required=false) String hx) {
-            return (hx != null) ? "fragments/home :: content" : "layout";
-        }
-        /*@GetMapping("/database")
-        public String database(@RequestHeader(value="HX-Request", required=false) String hx) {
-            return (hx!=null)?"fragments/database :: content":"layout";
-        }*/
-        @GetMapping("/contact") public String contact(@RequestHeader(value="HX-Request", required=false) String hx) {
-            return (hx!=null)?"fragments/contact :: content":"layout";
-        }
-        @GetMapping("/messages") public String messages(@RequestHeader(value="HX-Request", required=false) String hx) {
-            return (hx!=null)?"fragments/messages :: content":"layout";
-        }
-        @GetMapping("/chart") public String chart(@RequestHeader(value="HX-Request", required=false) String hx) {
-            return (hx!=null)?"fragments/chart :: content":"layout";
-        }
-        @GetMapping("/crud") public String crud(@RequestHeader(value="HX-Request", required=false) String hx) {
-            return (hx!=null)?"fragments/crud :: content":"layout";
-        }
-        @GetMapping("/restful") public String restful(@RequestHeader(value="HX-Request", required=false) String hx) {
-            return (hx!=null)?"fragments/restful :: content":"layout";
-        }
-        @GetMapping("/admin") public String admin(@RequestHeader(value="HX-Request", required=false) String hx) {
-            return (hx!=null)?"fragments/admin :: content":"layout";
-        }
+    private final GepRepository gepRepository;
+    private final ContactRepository contactRepository;   // ← kisbetűs mező
 
-        @GetMapping("/login") public String login(@RequestHeader(value="HX-Request", required=false) String hx) {
-            return (hx!=null)?"fragments/login :: content":"layout";
-        }
-
-        private final GepRepository gepRepository;
-
-
-        public PageController(GepRepository gepRepository) {
-            this.gepRepository = gepRepository;
-        }
-
-
-        @GetMapping("/database")
-        public String database(@RequestHeader(value = "HX-Request", required = false) String hx,
-                               Model model) {
-            model.addAttribute("lista", gepRepository.findAllWithRefs());
-            return (hx != null) ? "fragments/database :: content" : "layout";
-        }
+    public PageController(GepRepository gepRepository,
+                          ContactRepository contactRepository) {
+        this.gepRepository = gepRepository;
+        this.contactRepository = contactRepository;
     }
 
+    @GetMapping("/")
+    public String home(@RequestHeader(value = "HX-Request", required = false) String hx) {
+        return (hx != null) ? "fragments/home :: content" : "layout";
+    }
+
+    @GetMapping("/database")
+    public String database(@RequestHeader(value = "HX-Request", required = false) String hx,
+                           Model model) {
+        model.addAttribute("lista", gepRepository.findAllWithRefs());
+        return (hx != null) ? "fragments/database :: content" : "layout";
+    }
+
+    // --- CONTACT: csak EZ az egyetlen GET legyen! ---
+    @GetMapping("/contact")
+    public String contact(@RequestHeader(value="HX-Request", required=false) String hx,
+                          Model model) {
+        if (!model.containsAttribute("form")) {
+            model.addAttribute("form", new Contact());
+        }
+        if (hx != null) {
+            return "fragments/contact :: content";
+        }
+        model.addAttribute("view", "fragments/contact"); // <-- CSAK a template neve
+        return "layout";
+    }
+
+    @PostMapping("/contact")
+    public String submitContact(@RequestHeader(value="HX-Request", required=false) String hx,
+                                @Valid @ModelAttribute("form") Contact form,
+                                BindingResult br,
+                                Model model,
+                                RedirectAttributes ra) {
+        if (br.hasErrors()) {
+            if (hx != null) {
+                return "fragments/contact :: content";
+            }
+            model.addAttribute("view", "fragments/contact"); // <-- CSAK a template neve
+            return "layout";
+        }
+
+        contactRepository.save(form);
+
+        if (hx != null) {
+            model.addAttribute("ok", true);
+            model.addAttribute("form", new Contact());
+            return "fragments/contact :: content";
+        }
+        ra.addFlashAttribute("ok", true);
+        return "redirect:/contact";
+    }
+
+
+    // --- a többi oldal maradhat így ---
+    @GetMapping("/messages")
+    public String messages(@RequestHeader(value = "HX-Request", required = false) String hx) {
+        return (hx != null) ? "fragments/messages :: content" : "layout";
+    }
+
+    @GetMapping("/chart")
+    public String chart(@RequestHeader(value = "HX-Request", required = false) String hx) {
+        return (hx != null) ? "fragments/chart :: content" : "layout";
+    }
+
+    @GetMapping("/crud")
+    public String crud(@RequestHeader(value = "HX-Request", required = false) String hx) {
+        return (hx != null) ? "fragments/crud :: content" : "layout";
+    }
+
+    @GetMapping("/restful")
+    public String restful(@RequestHeader(value = "HX-Request", required = false) String hx) {
+        return (hx != null) ? "fragments/restful :: content" : "layout";
+    }
+
+    @GetMapping("/admin")
+    public String admin(@RequestHeader(value = "HX-Request", required = false) String hx) {
+        return (hx != null) ? "fragments/admin :: content" : "layout";
+    }
+
+    @GetMapping("/login")
+    public String login(@RequestHeader(value = "HX-Request", required = false) String hx) {
+        return (hx != null) ? "fragments/login :: content" : "layout";
+    }
+
+
+}
