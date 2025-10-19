@@ -1,0 +1,55 @@
+<section th:fragment="content" class="page-section" id="contact">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 col-xl-6 text-center">
+                <h2 class="mt-0">Regisztráció</h2>
+                <hr class="divider" />
+                <p class="text-muted mb-5">Itt lehet regisztrálni!</p>
+            </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+            <div class="col-lg-6" th:fragment="content" xmlns:th="http://www.thymeleaf.org">
+                <div class="alert alert-success d-flex align-items-center mb-3"
+                     th:if="${ok}">
+                    <i class="bi bi-check-circle me-2"></i>
+                    <span>Sikeres regisztráció!</span>
+                </div>
+
+
+                <div th:fragment="content" xmlns:th="http://www.thymeleaf.org">
+                    <form th:action="@{/register}" method="post" th:object="${form}">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+                        <div class="mb-3">
+                            <label class="form-label">Felhasználónév</label>
+                            <input class="form-control" th:field="*{username}">
+                            <div class="invalid-feedback d-block" th:errors="*{username}"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Jelszó</label>
+                            <input class="form-control" type="password" th:field="*{password}">
+                            <div class="invalid-feedback d-block" th:errors="*{password}"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Jelszó megerősítése</label>
+                            <input class="form-control" type="password" th:field="*{confirmPassword}">
+                            <div class="invalid-feedback d-block" th:errors="*{confirmPassword}"></div>
+                        </div>
+
+                        <!-- stb. -->
+                        <button class="btn btn-primary">Regisztráció</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-4 text-center mb-5 mb-lg-0">
+                <i class="bi-phone fs-2 mb-3 text-muted"></i>
+                <div>+1 (555) 123-4567</div>
+            </div>
+        </div>
+    </div>
+</section>
