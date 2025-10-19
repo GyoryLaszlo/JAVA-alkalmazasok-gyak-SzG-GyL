@@ -26,6 +26,61 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link"
+               th:href="@{/database}"
+               th:attr="hx-get=@{/database}, hx-target='#content', hx-push-url='true'">
+                Adatbázis
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link"
+               th:href="@{/contact}"
+               th:attr="hx-get=@{/contact}, hx-target='#content', hx-push-url='true'">
+                Kapcsolat
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link"
+               th:href="@{/messages}"
+               th:attr="hx-get=@{/messages}, hx-target='#content', hx-push-url='true'">
+                Üzenetek
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link"
+               th:href="@{/chart}"
+               th:attr="hx-get=@{/chart}, hx-target='#content', hx-push-url='true'">
+                Diagram
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link"
+               th:href="@{/crud}"
+               th:attr="hx-get=@{/crud}, hx-target='#content', hx-push-url='true'">
+                CRUD
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link"
+               th:href="@{/restful}"
+               th:attr="hx-get=@{/restful}, hx-target='#content', hx-push-url='true'">
+                RESTful
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link"
+               th:href="@{/admin}"
+               th:attr="hx-get=@{/admin}, hx-target='#content', hx-push-url='true'">
+                Admin
+            </a>
+        </li>
     </ul>
 
 
