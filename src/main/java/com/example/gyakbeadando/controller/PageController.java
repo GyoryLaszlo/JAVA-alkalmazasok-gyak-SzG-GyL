@@ -13,10 +13,10 @@ public class PageController {
         public String home(@RequestHeader(value="HX-Request", required=false) String hx) {
             return (hx != null) ? "fragments/home :: content" : "layout";
         }
-        @GetMapping("/database")
+        /*@GetMapping("/database")
         public String database(@RequestHeader(value="HX-Request", required=false) String hx) {
             return (hx!=null)?"fragments/database :: content":"layout";
-        }
+        }*/
         @GetMapping("/contact") public String contact(@RequestHeader(value="HX-Request", required=false) String hx) {
             return (hx!=null)?"fragments/contact :: content":"layout";
         }
@@ -48,6 +48,11 @@ public class PageController {
         }
 
 
-
+        @GetMapping("/database")
+        public String database(@RequestHeader(value = "HX-Request", required = false) String hx,
+                               Model model) {
+            model.addAttribute("lista", gepRepository.findAllWithRefs());
+            return (hx != null) ? "fragments/database :: content" : "layout";
+        }
     }
 
