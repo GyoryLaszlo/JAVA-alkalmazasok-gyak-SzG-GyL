@@ -64,13 +64,22 @@
         </div>
     </header>
     <!-- About-->
-    <section class="page-section bg-primary" id="database">
+    <section class="page-section bg-primary" id="about">
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-lg-8 text-center">
-                    <h2 class="text-white mt-0">Megvan, amire szükséged van!</h2>
+                    <h2 class="text-white mt-0">Megvan, amire szükséged van!<br>NovaBook Technologies</h2>
                     <hr class="divider divider-light" />
-                    <p class="text-white-75 mb-4">Néhány notebook kerül bemutatásra az oldalon, ami adatbázisból kerül lekérdezésre és relációs adatbázis használatával!</p>
+                    <p class="text-white-75 mb-4 text-justify">A NovaBook Technologies egy frissen alapított innovatív vállalat, amely prémium kategóriás notebookok fejlesztésével és értékesítésével foglalkozik.
+                        A cég célja, hogy a modern felhasználók igényeire szabott, nagy teljesítményű, mégis megfizethető laptopokat kínáljon.
+                        Termékeik között megtalálhatók a diákoknak szánt könnyű ultrabookok, valamint a professzionális grafikusok és fejlesztők számára készült erősebb modellek is.
+                        A vállalat különlegessége, hogy minden eszközük moduláris felépítésű, így az alkatrészek könnyen cserélhetők és bővíthetők.
+                        A NovaBook nagy hangsúlyt fektet a fenntarthatóságra, ezért gépeik újrahasznosított alumíniumból készülnek.
+                        A cég központja Budapesten található, de rövid időn belül tervezi európai értékesítési hálózat kiépítését.
+                        Fejlesztőcsapatuk folyamatosan dolgozik az energiahatékonyság és hőelvezetés optimalizálásán.
+                        A NovaBook notebookjai előtelepített Linux vagy Windows rendszerrel is elérhetők, a felhasználói igények szerint.
+                        A vállalat filozófiája szerint a technológia akkor értékes, ha megbízható és mindenki számára elérhető.
+                        Rövid idő alatt a NovaBook a fiatal technológiai startupok egyik legígéretesebb szereplőjévé vált Magyarországon.</p>
                     <a class="btn btn-light btn-xl" href="#services">Mutasd!</a>
                 </div>
             </div>
@@ -118,8 +127,8 @@
         <div class="container-fluid p-0">
             <div class="row g-0">
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" th:href="@{/assets/img/portfolio/fullsize/1.jpg}" title="Project Name">
-                        <img class="img-fluid" th:src="@{/assets/img/portfolio/thumbnails/1.jpg}" alt="..." />
+                    <a class="portfolio-box" href="assets/img/portfolio/fullsize/1.jpg" title="Project Name">
+                        <img class="img-fluid" src="assets/img/portfolio/thumbnails/1.jpg" alt="..." />
                         <div class="portfolio-box-caption">
                             <div class="project-category text-white-50">Category</div>
                             <div class="project-name">Project Name</div>
@@ -182,70 +191,70 @@
         </div>
     </section>-->
     <!-- Contact-->
-    <section class="page-section" id="contact">
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-lg-8 col-xl-6 text-center">
-                    <h2 class="mt-0">Üzenetküldés!</h2>
-                    <hr class="divider" />
-                    <p class="text-muted mb-5">Ezt csak akkor láthatod, ha regisztrált vagy! Mivál látod, így tudsz üzenetet küldeni nekünk!</p>
-                </div>
-            </div>
-            <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
-                <div class="col-lg-6">
+<!--    <section class="page-section" id="contact">-->
+<!--        <div class="container px-4 px-lg-5">-->
+<!--            <div class="row gx-4 gx-lg-5 justify-content-center">-->
+<!--                <div class="col-lg-8 col-xl-6 text-center">-->
+<!--                    <h2 class="mt-0">Üzenetküldés!</h2>-->
+<!--                    <hr class="divider" />-->
+<!--                    <p class="text-muted mb-5">Ezt csak akkor láthatod, ha regisztrált vagy! Mivál látod, így tudsz üzenetet küldeni nekünk!</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row gx-4 gx-lg-5 justify-content-center mb-5">-->
+<!--                <div class="col-lg-6">-->
 
-                    <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                        <!-- Name input-->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                            <label for="name">Teljes név</label>
-                            <div class="invalid-feedback" data-sb-feedback="name:required">Kötelező név mező.</div>
-                        </div>
-                        <!-- Email address input-->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
-                            <label for="email">Email cím</label>
-                            <div class="invalid-feedback" data-sb-feedback="email:required">Kötelező email mező.</div>
-                            <div class="invalid-feedback" data-sb-feedback="email:email">Email formátum nem megfelelő.</div>
-                        </div>
-                        <!-- Phone number input-->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
-                            <label for="phone">Telefonszám</label>
-                            <div class="invalid-feedback" data-sb-feedback="phone:required">Kötelező telefonszám mező..</div>
-                        </div>
-                        <!-- Message input-->
-                        <div class="form-floating mb-3">
-                            <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
-                            <label for="message">Üzenet...</label>
-                            <div class="invalid-feedback" data-sb-feedback="message:required">Kötelező üzenet mező</div>
-                        </div>
-                        <!-- Submit success message-->
-                        <!---->
-                        <!-- This is what your users will see when the form-->
-                        <!-- has successfully submitted-->
-                        <div class="d-none" id="submitSuccessMessage">
-                            <div class="text-center mb-3">
-                                <div class="fw-bolder">Űrlap beküldése sikeres!</div>
-                            </div>
-                        </div>
-                        <!-- Submit error message-->
-                        <!---->
-                        <!-- This is what your users will see when there is-->
-                        <!-- an error submitting the form-->
-                        <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Hibás küldés!</div></div>
-                        <!-- Submit Button-->
-                        <div class="d-grid"><button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Küldés</button></div>
-                    </form>
-                </div>
-            </div>
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-lg-4 text-center mb-5 mb-lg-0">
-                    <i class="bi-phone fs-2 mb-3 text-muted"></i>
-                    <div>+36 30 123 4567</div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!--                    <form id="contactForm" data-sb-form-api-token="API_TOKEN">-->
+<!--                        &lt;!&ndash; Name input&ndash;&gt;-->
+<!--                        <div class="form-floating mb-3">-->
+<!--                            <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />-->
+<!--                            <label for="name">Teljes név</label>-->
+<!--                            <div class="invalid-feedback" data-sb-feedback="name:required">Kötelező név mező.</div>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Email address input&ndash;&gt;-->
+<!--                        <div class="form-floating mb-3">-->
+<!--                            <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />-->
+<!--                            <label for="email">Email cím</label>-->
+<!--                            <div class="invalid-feedback" data-sb-feedback="email:required">Kötelező email mező.</div>-->
+<!--                            <div class="invalid-feedback" data-sb-feedback="email:email">Email formátum nem megfelelő.</div>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Phone number input&ndash;&gt;-->
+<!--                        <div class="form-floating mb-3">-->
+<!--                            <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />-->
+<!--                            <label for="phone">Telefonszám</label>-->
+<!--                            <div class="invalid-feedback" data-sb-feedback="phone:required">Kötelező telefonszám mező..</div>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Message input&ndash;&gt;-->
+<!--                        <div class="form-floating mb-3">-->
+<!--                            <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>-->
+<!--                            <label for="message">Üzenet...</label>-->
+<!--                            <div class="invalid-feedback" data-sb-feedback="message:required">Kötelező üzenet mező</div>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Submit success message&ndash;&gt;-->
+<!--                        &lt;!&ndash;&ndash;&gt;-->
+<!--                        &lt;!&ndash; This is what your users will see when the form&ndash;&gt;-->
+<!--                        &lt;!&ndash; has successfully submitted&ndash;&gt;-->
+<!--                        <div class="d-none" id="submitSuccessMessage">-->
+<!--                            <div class="text-center mb-3">-->
+<!--                                <div class="fw-bolder">Űrlap beküldése sikeres!</div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Submit error message&ndash;&gt;-->
+<!--                        &lt;!&ndash;&ndash;&gt;-->
+<!--                        &lt;!&ndash; This is what your users will see when there is&ndash;&gt;-->
+<!--                        &lt;!&ndash; an error submitting the form&ndash;&gt;-->
+<!--                        <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Hibás küldés!</div></div>-->
+<!--                        &lt;!&ndash; Submit Button&ndash;&gt;-->
+<!--                        <div class="d-grid"><button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Küldés</button></div>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row gx-4 gx-lg-5 justify-content-center">-->
+<!--                <div class="col-lg-4 text-center mb-5 mb-lg-0">-->
+<!--                    <i class="bi-phone fs-2 mb-3 text-muted"></i>-->
+<!--                    <div>+36 30 123 4567</div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
     <!-- Footer-->
 </div>

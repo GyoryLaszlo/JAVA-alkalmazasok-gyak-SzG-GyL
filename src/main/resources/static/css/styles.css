@@ -11122,3 +11122,8 @@ td span.chip{ white-space:nowrap; }
 .card.modern .card-body {
     font-size: 12px;
 }
+
+.text-justify {
+    text-align: justify;
+    text-justify: inter-word;
+}
