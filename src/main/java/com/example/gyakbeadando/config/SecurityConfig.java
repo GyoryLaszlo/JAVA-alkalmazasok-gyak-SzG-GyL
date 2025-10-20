@@ -10,6 +10,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 
 import javax.sql.DataSource;
 
@@ -18,24 +20,33 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/database", "/chart","/crud", "/restful", "/contact", "/register",
-                        "/css/**", "/js/**", "/assets/**", "/webjars/**").permitAll()
-                .requestMatchers("/login", "/register").permitAll()
-                .requestMatchers(HttpMethod.GET,  "/contact").permitAll()
-                .requestMatchers(HttpMethod.POST, "/contact").permitAll()
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/messages/**").hasAnyRole("ADMIN","USER")
-                .anyRequest().authenticated()
-        ).formLogin(f -> f
-                .loginPage("/login")
-                .defaultSuccessUrl("/", true)
-                .permitAll()
-        ).logout(l -> l
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/?logout")
-                .permitAll()
-        );
+        http
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/database", "/chart","/crud", "/restful", "/contact", "/register",
+                                "/css/**", "/js/**", "/assets/**", "/webjars/**").permitAll()
+                        .requestMatchers("/login", "/register").permitAll()
+                        .requestMatchers(HttpMethod.GET,  "/contact").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/contact").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/messages/**").hasAnyRole("ADMIN","USER")
+                        .anyRequest().authenticated()
+                )
+                .formLogin(f -> f
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/", true)
+                        .permitAll()
+                )
+                .logout(l -> l
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/?logout")
+                        .permitAll()
+                )
+                // LÉNYEG: token bekerül cookie-ba és request attribútumba is
+                .csrf(csrf -> csrf
+                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                        .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler())
+                );
+
 
         return http.build();
     }

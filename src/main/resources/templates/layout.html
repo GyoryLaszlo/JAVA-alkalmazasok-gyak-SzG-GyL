@@ -11,6 +11,15 @@
     <!-- (opcionális) History API támogatás több feature-höz -->
     <script src="https://unpkg.com/htmx.org/dist/ext/history.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <script>
+        document.body.addEventListener('htmx:configRequest', (e) => {
+            const token  = document.querySelector('meta[name="_csrf"]').content;
+            const header = document.querySelector('meta[name="_csrf_header"]').content;
+            e.detail.headers[header] = token;
+        });
+    </script>
 </head>
 <body>
 
@@ -106,10 +115,11 @@
 </nav>
 
 <!-- IDE kerül minden aloldal tartalma -->
-<main id="content" th:insert="${view} ?: ~{fragments/home :: content}">
-    <!-- első betöltéskor szerver oldalon beillesztjük a home-ot -->
-    <div  th:replace="${view} != null ? ~{${view} :: content} : ~{fragments/home :: content}"></div>
-    <!--<div th:replace="~{fragments/home :: content}"></div>-->
+<main id="content">
+    <div th:replace="${view} == null
+                     ? ~{fragments/home :: content}
+                     : ~{__${view}__ :: content}">
+    </div>
 </main>
 
 <footer class="bg-light py-5">
