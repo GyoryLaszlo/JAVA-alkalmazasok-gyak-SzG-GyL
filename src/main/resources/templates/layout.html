@@ -10,6 +10,7 @@
     <script src="https://unpkg.com/htmx.org@1.9.12"></script>
     <!-- (opcionális) History API támogatás több feature-höz -->
     <script src="https://unpkg.com/htmx.org/dist/ext/history.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 
@@ -90,12 +91,15 @@
             <form th:action="@{/logout}" method="post" class="d-inline">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                 Szia, <strong><span sec:authentication="name"></span></strong>!
-                <button class="btn btn-sm btn-outline-light" type="submit">Kijelentkezés</button>
+                <button class="btn btn-primary btn-sm" type="submit">Kijelentkezés</button>
             </form>
         </div>
         <div sec:authorize="isAnonymous()">
             Szia, Vendég!
-            <a th:href="@{/login}">Bejelentkezés</a>
+            <a th:href="@{/login}"
+               data-bs-toggle="modal"
+               data-bs-target="#loginModal"
+               onclick="event.preventDefault()">Bejelentkezés</a>
         </div>
     </div>
 </div>
@@ -111,6 +115,30 @@
 <footer class="bg-light py-5">
     <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2025 - NJE Gamf - Mérnökinformatika</div></div>
 </footer>
+
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true" sec:authorize="isAnonymous()">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Bejelentkezés</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Bezárás"></button>
+            </div>
+            <form th:action="@{/login}" method="post">
+                <div class="modal-body d-flex flex-column gap-3">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <input class="form-control" name="username" placeholder="Felhasználónév" required>
+                    <input class="form-control" type="password" name="password" placeholder="Jelszó" required>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit">Bejelentkezés</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- SimpleLightbox plugin JS-->

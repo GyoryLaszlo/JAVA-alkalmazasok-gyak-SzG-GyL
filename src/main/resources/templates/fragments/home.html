@@ -45,10 +45,10 @@
                 <input class="form-control w-auto" type="text"     name="username" placeholder="Felhasználónév" required>
                 <input class="form-control w-auto" type="password" name="password" placeholder="Jelszó" required>
                 <button type="submit" class="btn btn-primary">Bejelentkezés</button>
-
+                <a th:href="@{/register}"
+                   th:attr="hx-get=@{/register}, hx-target='#content', hx-push-url='true'">Regisztráció</a>
             </form>
-            <a th:href="@{/register}"
-               th:attr="hx-get=@{/register}, hx-target='#content', hx-push-url='true'">Regisztráció</a>
+
             <!--<div sec:authorize="isAnonymous()">
                 <a th:href="@{/register}">Regisztráció</a>
             </div>-->
