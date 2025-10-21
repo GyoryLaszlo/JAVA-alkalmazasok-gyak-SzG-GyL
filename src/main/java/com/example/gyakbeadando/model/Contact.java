@@ -2,6 +2,9 @@ package com.example.gyakbeadando.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -24,6 +27,10 @@ public class Contact {
 
     @NotBlank(message = "Üzenet kötelező")
     private String message;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+    ;
 
     public Contact() {
     }
@@ -66,5 +73,9 @@ public class Contact {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 }
