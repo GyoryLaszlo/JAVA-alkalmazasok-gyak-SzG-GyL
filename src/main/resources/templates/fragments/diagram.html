@@ -1,0 +1,105 @@
+<section th:fragment="content" class="page-section py-0" id="diagram">
+    <div class="container-fluid bg-primary text-center text-white py-5">
+        <div class="container px-4">
+            <h2 class="text-white mt-0">Notebook Statisztikák</h2>
+            <hr class="divider divider-light"/>
+            <p class="text-white mb-4">Az alábbi statisztikák a notebookok ár-, rendszer- és méretbeli megoszlását
+                ábrázolják.</p>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="row align-items-center mb-0">
+            <div class="col-lg-6 col-md-12 mb-4">
+                <h4 class="text-primary">Processzor-átlagárak gyártónként</h4>
+                <p class="text-muted">
+                    Az alábbi diagram a notebook-adatbázisban szereplő eszközök processzorainak <span
+                        class="text-primary fw-semibold">átlagárát mutatja be
+                    gyártónként.</span> Az adatok a teljes készlet alapján kerültek kiszámításra, így jól látható, hogy
+                    mely gyártók kínálnak jellemzően magasabb árkategóriájú CPU-kat.
+                </p>
+                <p class="text-muted">
+                    Az árkülönbségek mögött elsősorban a processzorok <span class="text-primary fw-semibold">teljesítménye</span>,
+                    a <span class="text-primary fw-semibold">gyártók technológiai szintje</span> és a
+                    <span class="text-primary fw-semibold">márka ismertsége </span>áll.
+                    Ez jól mutatja, hogy a drágább modellek általában nagyobb teljesítményt és fejlettebb technológiát
+                    kínálnak.
+                </p>
+            </div>
+
+            <div class="col-lg-6 col-md-12 text-center">
+                <div class="chart-wrapper mx-auto" style="max-width: 500px;">
+                    <canvas
+                            id="priceByCPU"
+                            class="w-100"
+                            th:attr="data-labels=${avgPrices.keySet()}, data-values=${avgPrices.values()}">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-center flex-lg-row-reverse mb-5">
+            <div class="col-lg-6 col-md-12 mb-4">
+                <h4 class="text-primary">Notebookok száma operációs rendszer szerint</h4>
+                <p class="text-muted">
+                    Az alábbi kördiagram a notebookok <span class="text-primary fw-semibold">operációs rendszerek szerinti megoszlását</span>
+                    mutatja be.
+                    Jól látható, hogy a legtöbb készülék <span class="text-primary fw-semibold">Windows rendszert</span>
+                    futtat, de jelentős arányban találhatók
+                    <span class="text-primary fw-semibold">Linux</span> és <span class="text-primary fw-semibold">FreeDOS</span>
+                    gépek is, valamint néhány operációs rendszer nélküli modell.
+                </p>
+
+                <p class="text-muted">
+                    A <span class="text-primary fw-semibold">„Nincs OS”</span> kategória azokat a
+                    modelleket jelöli, amelyek telepítés nélkül kerülnek
+                    értékesítésre,
+                    lehetőséget adva a felhasználónak a saját szoftverkörnyezet kialakítására.
+                </p>
+            </div>
+
+            <div class="col-lg-6 col-md-12 text-center">
+                <div class="ratio ratio-1x1 mx-auto" style="max-width: 450px;">
+                    <canvas
+                            id="notebooksByOS"
+                            class="w-100 h-100"
+                            th:attr="data-labels=${osCounts.keySet()}, data-values=${osCounts.values()}">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-lg-10 col-md-12 mx-auto text-center">
+                <h4 class="text-primary fw-bold mb-3">
+                    Notebookok eloszlása kijelzőméret szerint
+                </h4>
+
+                <p class="text-muted">
+                    Az alábbi diagram a notebookok
+                    <span class="text-primary fw-semibold">kijelzőméretének eloszlását</span> mutatja be.
+                    A kínálatban messze a <span class="text-primary fw-semibold">15,6 hüvelykes</span> modellek
+                    dominálnak — ebből a méretkategóriából érhető el a
+                    legtöbb típus, több mint kétszer annyi, mint bármely más méretből.
+                    Ez a méret a legelterjedtebb, mivel <span class="text-primary fw-semibold">általános
+                    felhasználásra, otthoni és irodai munkára egyaránt
+                    ideális.</span>
+                </p>
+
+                <p class="text-muted mb-4">
+                    A kisebb kijelzővel rendelkező notebookok jellemzően hordozhatóbbak és irodai munkára készülnek,
+                    míg a nagyobb modellek inkább multimédiás és teljesítményorientált felhasználásra alkalmasak.
+                </p>
+
+                <div class="ratio ratio-16x9 mx-auto" style="max-width: 900px;">
+                    <canvas
+                            id="displaySizes"
+                            class="w-100 h-100"
+                            th:attr="data-labels=${displayCounts.keySet()}, data-values=${displayCounts.values()}">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

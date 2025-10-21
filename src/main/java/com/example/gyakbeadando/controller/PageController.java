@@ -155,10 +155,10 @@ public class PageController {
         return (hx != null) ? "fragments/messages :: content" : "layout";
     }
 
-    @GetMapping("/chart")
-    public String chart(@RequestHeader(value = "HX-Request", required = false) String hx) {
-        return (hx != null) ? "fragments/chart :: content" : "layout";
-    }
+//    @GetMapping("/chart")
+//    public String chart(@RequestHeader(value = "HX-Request", required = false) String hx) {
+//        return (hx != null) ? "fragments/chart :: content" : "layout";
+//    }
 
     @GetMapping("/crud")
     public String crud(@RequestHeader(value = "HX-Request", required = false) String hx) {
