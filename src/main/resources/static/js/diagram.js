@@ -28,7 +28,7 @@ function initCpuChart() {
         },
         options: {
             maintainAspectRatio: true,
-            aspectRatio: 3/2,
+            aspectRatio: 3 / 2,
             plugins: {
                 title: {
                     display: true,
@@ -79,12 +79,13 @@ function initOSChart() {
 }
 
 /* Kijzelzméret szerinti eloszlás */
-function initDisplaySizeChart(){
+function initDisplaySizeChart() {
 
     const canvas = document.getElementById("displaySizes");
     if (!canvas) return;
-    
-    const displayLabels = canvas.getAttribute("data-labels").replace(/[\[\]]/g, '').split(",");
+
+    let displayLabels = canvas.getAttribute("data-labels").replace(/[\[\]]/g, '').split(",");
+    displayLabels = displayLabels.map((e) => `${e}\"`);
     const displayCounts = canvas.getAttribute("data-values").replace(/[\[\]\s]/g, '').split(",").map(Number);
 
     new Chart(canvas, {
@@ -105,7 +106,19 @@ function initDisplaySizeChart(){
                 }
             },
             scales: {
-                y: { beginAtZero: true }
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        title: 'Darabszám'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Kijelzőméret'
+                    }
+                }
             }
         }
     });
