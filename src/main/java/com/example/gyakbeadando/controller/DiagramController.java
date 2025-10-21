@@ -20,6 +20,7 @@ public class DiagramController {
     public String showPage(@RequestHeader(value = "HX-Request", required = false) String hx, Model model){
         model.addAttribute("avgPrices", diagramService.getAvgPricesByManufacturer());
         model.addAttribute("osCounts", diagramService.getNotebookCountByOS());
+        model.addAttribute("displayCounts", diagramService.getNotebookCountByDisplaySize());
         return (hx != null) ? "fragments/diagram :: content" : "layout";
     }
 }

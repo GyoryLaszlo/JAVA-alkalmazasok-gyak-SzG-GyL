@@ -68,6 +68,38 @@
                 </div>
             </div>
         </div>
+
+        <div class="row mt-5">
+            <div class="col-lg-10 col-md-12 mx-auto text-center">
+                <h4 class="text-primary fw-bold mb-3">
+                    Notebookok eloszlása kijelzőméret szerint
+                </h4>
+
+                <p class="text-muted">
+                    Az alábbi diagram a notebookok
+                    <span class="text-primary fw-semibold">kijelzőméretének eloszlását</span> mutatja be.
+                    A kínálatban messze a <span class="text-primary fw-semibold">15,6 hüvelykes</span> modellek
+                    dominálnak — ebből a méretkategóriából érhető el a
+                    legtöbb típus, több mint kétszer annyi, mint bármely más méretből.
+                    Ez a méret a legelterjedtebb, mivel <span class="text-primary fw-semibold">általános
+                    felhasználásra, otthoni és irodai munkára egyaránt
+                    ideális.</span>
+                </p>
+
+                <p class="text-muted mb-4">
+                    A kisebb kijelzővel rendelkező notebookok jellemzően hordozhatóbbak és irodai munkára készülnek,
+                    míg a nagyobb modellek inkább multimédiás és teljesítményorientált felhasználásra alkalmasak.
+                </p>
+
+                <div class="ratio ratio-16x9 mx-auto" style="max-width: 900px;">
+                    <canvas
+                            id="displaySizes"
+                            class="w-100 h-100"
+                            th:attr="data-labels=${displayCounts.keySet()}, data-values=${displayCounts.values()}">
+                    </canvas>
+                </div>
+            </div>
+        </div>
     </div>
 
 </section>

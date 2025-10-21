@@ -5,10 +5,7 @@ import com.example.gyakbeadando.repo.GepRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class DiagramService {
@@ -68,5 +65,19 @@ public class DiagramService {
         if (lower.contains("nincs")) return "Nincs OS";
 
         return raw;
+    }
+
+    public Map<Double, Integer> getNotebookCountByDisplaySize() {
+        List<Gep> notebooks = gepRepo.findAll();
+        Map<Double, Integer> countsByDisplay = new TreeMap<>();
+
+        for (Gep gep : notebooks) {
+            Double size = gep.getKijelzo();
+            if (size != null) {
+                countsByDisplay.put(size, countsByDisplay.getOrDefault(size, 0) + 1);
+            }
+        }
+
+        return countsByDisplay;
     }
 }

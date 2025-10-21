@@ -3,6 +3,7 @@ document.body.addEventListener("htmx:afterSwap", function (evt) {
     if (evt.detail.target.id === "content") {
         initCpuChart();
         initOSChart();
+        initDisplaySizeChart();
     }
 });
 
@@ -72,6 +73,39 @@ function initOSChart() {
                     position: 'bottom',
                     padding: 15
                 }
+            }
+        }
+    });
+}
+
+/* Kijzelzméret szerinti eloszlás */
+function initDisplaySizeChart(){
+
+    const canvas = document.getElementById("displaySizes");
+    if (!canvas) return;
+    
+    const displayLabels = canvas.getAttribute("data-labels").replace(/[\[\]]/g, '').split(",");
+    const displayCounts = canvas.getAttribute("data-values").replace(/[\[\]\s]/g, '').split(",").map(Number);
+
+    new Chart(canvas, {
+        type: 'bar',
+        data: {
+            labels: displayLabels,
+            datasets: [{
+                label: 'Darabszám',
+                data: displayCounts,
+                backgroundColor: '#60a5fa'
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Kijelzőméret-eloszlás'
+                }
+            },
+            scales: {
+                y: { beginAtZero: true }
             }
         }
     });
