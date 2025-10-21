@@ -35,11 +35,38 @@ public class DiagramService {
             }
         }
 
-        for(String p : prices.keySet() ){
-            int avgPrice = (int)(prices.get(p) / counts.get(p));
-            avgsByManufacturers.put(p, avgPrice );
+        for (String p : prices.keySet()) {
+            int avgPrice = (int) (prices.get(p) / counts.get(p));
+            avgsByManufacturers.put(p, avgPrice);
         }
 
         return avgsByManufacturers;
+    }
+
+    public Map<String, Integer> getNotebookCountByOS() {
+        List<Gep> notebooks = gepRepo.findAll();
+        Map<String, Integer> countByOS = new HashMap<>();
+
+        for (Gep gep : notebooks) {
+            String osName = normalizeOSName(gep.getOprendszer().getNev());
+            countByOS.put(osName, countByOS.getOrDefault(osName, 0) + 1);
+        }
+
+        return countByOS;
+    }
+
+    private String normalizeOSName(String raw) {
+        if (raw == null) return "Ismeretlen";
+
+        String lower = raw.toLowerCase();
+
+        if (lower.contains("windows xp")) return "Windows XP";
+        if (lower.contains("vista")) return "Windows Vista";
+        if (lower.contains("windows 7")) return "Windows 7";
+        if (lower.contains("linux")) return "Linux";
+        if (lower.contains("freedos")) return "FreeDOS";
+        if (lower.contains("nincs")) return "Nincs OS";
+
+        return raw;
     }
 }

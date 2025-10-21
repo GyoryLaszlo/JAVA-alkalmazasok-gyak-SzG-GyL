@@ -18,8 +18,8 @@ public class DiagramController {
 
     @GetMapping("/diagram")
     public String showPage(@RequestHeader(value = "HX-Request", required = false) String hx, Model model){
-        Map<String, Integer> avgPricesByProcessorManufacturer = diagramService.getAvgPricesByManufacturer();
-        model.addAttribute("avgPrices", avgPricesByProcessorManufacturer);
+        model.addAttribute("avgPrices", diagramService.getAvgPricesByManufacturer());
+        model.addAttribute("osCounts", diagramService.getNotebookCountByOS());
         return (hx != null) ? "fragments/diagram :: content" : "layout";
     }
 }
