@@ -1,12 +1,47 @@
-<section th:fragment="content" class="page-section bg-primary" id="about">
-    <div class="container px-4 px-lg-5">
+<section th:fragment="content" class="page-section py-0" id="about">
+    <div class="container px-4 px-lg-5 py-5 bg-primary">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-lg-8 text-center">
-                <h2 class="text-white mt-0">Diagram</h2>
+                <h2 class="text-white mt-0">Notebook Statisztikák</h2>
                 <hr class="divider divider-light" />
-                <p class="text-white-75 mb-4">Tegyünk ki diagrammokat</p>
-
+                <p class="text-white mb-4">Az alábbi statisztikák a notebookok ár-, rendszer- és méretbeli megoszlását ábrázolják.</p>
             </div>
         </div>
     </div>
+
+    <div class="container my-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+                <h4 class="text-primary">Processzor-átlagárak gyártónként</h4>
+                <p class="text-muted">
+                    Az alábbi diagram a notebook-adatbázisban szereplő eszközök processzorainak átlagárát mutatja be
+                    gyártónként. Az adatok a teljes készlet alapján kerültek kiszámításra, így jól látható, hogy
+                    mely gyártók kínálnak jellemzően magasabb árkategóriájú CPU-kat.
+                </p>
+            </div>
+
+            <div class="col-lg-5 col-md-12 text-center px-5">
+                <canvas
+                        id="priceByCPU"
+                        width="300"
+                        height="200"
+                        th:attr="data-labels=${avgPrices.keySet()}, data-values=${avgPrices.values()}">
+                </canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="countByOS"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="displaySizes"></canvas>
+    </div>
+
+    <script th:inline="javascript">
+        let cpuLabels = [[${avgPrices.keySet()}]];
+        let cpuAvgPrices = [[${avgPrices.values()}]];
+    </script>
+
 </section>
