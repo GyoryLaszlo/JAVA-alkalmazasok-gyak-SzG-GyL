@@ -11127,3 +11127,17 @@ td span.chip{ white-space:nowrap; }
     text-align: justify;
     text-justify: inter-word;
 }
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive table {
+    min-width: 800px;
+}
+
+#messageTable tbody tr:hover {
+    cursor: pointer;
+}
