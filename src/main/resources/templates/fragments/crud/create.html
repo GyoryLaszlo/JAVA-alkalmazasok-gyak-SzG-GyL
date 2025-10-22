@@ -1,0 +1,91 @@
+<section th:fragment="content" class="page-section py-0" id="crud">
+    <div class="container-fluid bg-primary text-center text-white py-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="text-white mt-0">CRUD</h2>
+                <hr class="divider divider-light"/>
+                <p class="text-white-75 mb-4">Notebookok listájának kezelése</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5" style="max-width: 1000px;">
+        <div class="card shadow-sm border-0">
+            <div class="card-body px-4 py-4">
+                <h4 class="text-primary mb-4 text-center">Új notebook hozzáadása</h4>
+
+                <form th:action="@{/crud/ment}" th:object="${notebook}" method="post">
+
+                    <div class="row g-3">
+                        <div class="col-sm-4">
+                            <label class="form-label fw-semibold mb-1">Gyártó</label>
+                            <input type="text" th:field="*{gyarto}" class="form-control" required>
+                        </div>
+
+                        <div class="col-sm-8">
+                            <label class="form-label fw-semibold mb-1">Típus</label>
+                            <input type="text" th:field="*{tipus}" class="form-control" required>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-4">
+                            <label class="form-label fw-semibold mb-1">Kijelző (col)</label>
+                            <input type="number" th:field="*{kijelzo}" class="form-control"
+                                   placeholder="Pl. 15.6" step="0.1" min="10" max="20" required>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-4">
+                            <label class="form-label fw-semibold mb-1">Memória (MiB)</label>
+                            <input type="number" th:field="*{memoria}" class="form-control" required>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-4">
+                            <label class="form-label fw-semibold mb-1">Merevlemez (GB)</label>
+                            <input type="number" th:field="*{merevlemez}" class="form-control" required>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="form-label fw-semibold mb-1">Videóvezérlő</label>
+                            <input type="text" th:field="*{videovezerlo}" class="form-control" required>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <label class="form-label fw-semibold mb-1">Ár (Pengő)</label>
+                            <input type="number" th:field="*{ar}" class="form-control" required>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <label class="form-label fw-semibold mb-1">Mennyiség (db)</label>
+                            <input type="number" th:field="*{dbMennyiseg}" class="form-control" required>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="form-label fw-semibold mb-1">Processzor</label>
+                            <select th:field="*{processzor}" class="form-select">
+                                <option value="">-- Válassz --</option>
+                                <option th:each="p : ${processors}" th:value="${p.id}" th:text="${p.tipus}"></option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="form-label fw-semibold mb-1">Operációs rendszer</label>
+                            <select th:field="*{oprendszer}" class="form-select">
+                                <option value="">-- Válassz --</option>
+                                <option th:each="os : ${opSystems}" th:value="${os.id}" th:text="${os.nev}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2 mt-4">
+                        <a th:href="@{/crud}" class="btn btn-outline-secondary px-4">
+                            <i class="bi bi-arrow-left"></i> Vissza
+                        </a>
+                        <button type="submit" class="btn btn-primary text-white px-4">
+                            <i class="bi bi-save"></i> Mentés
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

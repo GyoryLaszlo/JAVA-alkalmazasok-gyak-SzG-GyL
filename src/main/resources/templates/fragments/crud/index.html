@@ -59,7 +59,7 @@
             <ul class="pagination justify-content-center mb-0">
 
                 <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
-                    <a class="page-link" th:href="@{|/crud?page=${currentPage - 1}|}" aria-label="Előző">
+                    <a class="page-link" th:href="@{|/templates/fragments/crud?page=${currentPage - 1}|}" aria-label="Előző">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
