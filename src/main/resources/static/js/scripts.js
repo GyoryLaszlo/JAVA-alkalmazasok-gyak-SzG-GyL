@@ -89,3 +89,19 @@ document.body.addEventListener('htmx:afterSwap', (e) => {
         initMessageModal();
     }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const deleteModal = document.getElementById('deleteModal');
+    const deleteMessage = document.getElementById('deleteMessage');
+    const confirmBtn = document.getElementById('confirmDeleteBtn');
+
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        const id = button.getAttribute('data-id');
+        const name = button.getAttribute('data-name');
+
+        deleteMessage.textContent = `Biztosan törlöd a(z) "${name}" notebookot?`;
+
+        confirmBtn.href = `/crud/delete/${id}`;
+    });
+});

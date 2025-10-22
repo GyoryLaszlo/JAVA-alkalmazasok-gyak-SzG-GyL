@@ -61,4 +61,9 @@ public class NotebookController {
         return "redirect:/crud";
     }
 
+    @GetMapping("/crud/delete/{id}")
+    public String deleteNotebook(@PathVariable(name = "id") long id) {
+        gepRepo.delete(gepRepo.findById(id).get());
+        return "redirect:/crud";
+    }
 }
