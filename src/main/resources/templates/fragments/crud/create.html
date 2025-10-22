@@ -60,7 +60,7 @@
 
                         <div class="col-sm-6">
                             <label class="form-label fw-semibold mb-1">Processzor</label>
-                            <select th:field="*{processzor}" class="form-select">
+                            <select th:field="*{processzor}" class="form-select" required>
                                 <option value="">-- Válassz --</option>
                                 <option th:each="p : ${processors}" th:value="${p.id}" th:text="${p.tipus}"></option>
                             </select>
@@ -68,7 +68,7 @@
 
                         <div class="col-sm-6">
                             <label class="form-label fw-semibold mb-1">Operációs rendszer</label>
-                            <select th:field="*{oprendszer}" class="form-select">
+                            <select th:field="*{oprendszer}" class="form-select" required>
                                 <option value="">-- Válassz --</option>
                                 <option th:each="os : ${opSystems}" th:value="${os.id}" th:text="${os.nev}"></option>
                             </select>
