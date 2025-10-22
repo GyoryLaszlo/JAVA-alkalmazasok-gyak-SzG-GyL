@@ -27,6 +27,7 @@ public class Gep {
 
     // getters/setters
     public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
     public String getGyarto() { return gyarto; }
     public void setGyarto(String gyarto) { this.gyarto = gyarto; }
     public String getTipus() { return tipus; }

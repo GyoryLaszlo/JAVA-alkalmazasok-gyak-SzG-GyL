@@ -12,9 +12,11 @@
     <div class="container my-5" style="max-width: 1000px;">
         <div class="card shadow-sm border-0">
             <div class="card-body px-4 py-4">
-                <h4 class="text-primary mb-4 text-center">Új notebook hozzáadása</h4>
+                <h4 class="text-primary mb-4 text-center">Notebook szerkesztése</h4>
 
-                <form th:action="@{/crud/ment}" th:object="${notebook}" method="post">
+                <form action="#" th:action="@{/crud/modosit}" th:object="${notebook}" method="post">
+
+                    <p><input type="hidden" th:field="*{id}" value= "${notebook.id}" /></p>
 
                     <div class="row g-3">
                         <div class="col-sm-4">
@@ -60,7 +62,8 @@
 
                         <div class="col-sm-6">
                             <label class="form-label fw-semibold mb-1">Processzor</label>
-                            <select th:field="*{processzor}" class="form-select" required>
+                            <select th:field="*{processzor}" class="form-select"
+                                    required>
                                 <option value="">-- Válassz --</option>
                                 <option th:each="p : ${processors}" th:value="${p.id}" th:text="${p.tipus}"></option>
                             </select>
@@ -68,7 +71,8 @@
 
                         <div class="col-sm-6">
                             <label class="form-label fw-semibold mb-1">Operációs rendszer</label>
-                            <select th:field="*{oprendszer}" class="form-select" required>
+                            <select th:field="*{oprendszer}" class="form-select"
+                                    required>
                                 <option value="">-- Válassz --</option>
                                 <option th:each="os : ${opSystems}" th:value="${os.id}" th:text="${os.nev}"></option>
                             </select>
@@ -80,7 +84,7 @@
                             Vissza
                         </a>
                         <button type="submit" class="btn btn-primary text-white px-4">
-                            Mentés
+                            Módosít
                         </button>
                     </div>
 

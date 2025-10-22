@@ -61,6 +61,26 @@ public class NotebookController {
         return "redirect:/crud";
     }
 
+    @GetMapping("/crud/edit/{id}")
+    public String showEditPage(@PathVariable(name = "id") long id, @RequestHeader(value = "HX-Request", required = false) String hx, Model model) {
+        model.addAttribute("notebook", gepRepo.findById(id));
+        model.addAttribute("processors", processorRepo.findAll());
+        model.addAttribute("opSystems", osRepo.findAll());
+
+        if (hx != null) {
+            return "fragments/crud/edit :: content";
+        } else {
+            model.addAttribute("view", "fragments/crud/edit");
+            return "layout";
+        }
+    }
+
+    @PostMapping(value = "/crud/modosit")
+    public String modifyNotebook(@ModelAttribute Gep notebook) {
+        gepRepo.save(notebook);
+        return "redirect:/crud";
+    }
+
     @GetMapping("/crud/delete/{id}")
     public String deleteNotebook(@PathVariable(name = "id") long id) {
         gepRepo.delete(gepRepo.findById(id).get());

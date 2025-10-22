@@ -23,7 +23,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/database", "/diagram",
-                                "/crud", "/crud/uj", "/crud/ment", "/crud/delete/{id}",
+                                "/crud", "/crud/uj", "/crud/ment", "/crud/delete/{id}", "/crud/edit/{id}","/crud/modosit",
                                 "/restful", "/contact", "/register",
                                 "/css/**", "/js/**", "/assets/**", "/webjars/**").permitAll()
                         .requestMatchers("/login", "/register").permitAll()
