@@ -1,12 +1,82 @@
-<section th:fragment="content" class="page-section bg-primary" id="about">
-    <div class="container px-4 px-lg-5">
+<section th:fragment="content" class="page-section py-0" id="crud">
+    <div class="container-fluid bg-primary text-center text-white py-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-lg-8 text-center">
                 <h2 class="text-white mt-0">CRUD</h2>
-                <hr class="divider divider-light" />
-                <p class="text-white-75 mb-4">Tegyünk ide a crudot</p>
-
+                <hr class="divider divider-light"/>
+                <p class="text-white-75 mb-4">Notebookok listájának kezelése</p>
             </div>
         </div>
+    </div>
+
+    <div class="container-lg my-5">
+        <h3 class="mb-4 text-primary text-center">Notebookok listája</h3>
+        <div class="table-responsive w-75 mx-auto d-flex flex-column align-items-center">
+            <a th:href="@{'/crud/uj'}" class="btn btn-primary align-self-end mb-2">Új notebook hozzáadása</a>
+            <table class="table table-hover shadow-sm bg-white rounded" id="processorsTable">
+                <thead class="table-primary">
+                <tr>
+                    <th class="ps-4" style="width: 10%;">#Azonosító</th>
+                    <th>Gyártó</th>
+                    <th>Típus</th>
+                    <th>Memória</th>
+                    <th>Kijelző mérete</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${#lists.isEmpty(notebooks)}">
+                    <td colspan="6" class="text-center text-muted py-4">
+                        Üres lista.
+                    </td>
+                </tr>
+                <tr th:each="n : ${notebooks}">
+                    <td th:text="${n.id}" class="ps-4 text-muted text-center"></td>
+                    <td th:text="${n.gyarto}" class="text-primary"></td>
+                    <td th:text="${n.tipus}" class="fw-semibold text-dark"></td>
+                    <td th:text="|${n.memoria} MiB|"></td>
+                    <td th:text="|${n.kijelzo}”|"></td>
+                    <td class="d-flex gap-3">
+                        <a th:href="@{'/edit/'+${n.id}}" class="text-dark">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                            </svg>
+                        </a>
+                        <a th:href="@{'/delete/'+${n.id}}" class="text-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <nav th:if="${totalPages > 1}" class="mt-4">
+            <ul class="pagination justify-content-center mb-0">
+
+                <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{|/crud?page=${currentPage - 1}|}" aria-label="Előző">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <li class="page-item"
+                    th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                    th:classappend="${i == currentPage} ? 'active'">
+                    <a class="page-link" th:href="@{|/crud?page=${i}|}" th:text="${i + 1}"></a>
+                </li>
+
+                <li class="page-item" th:classappend="${currentPage + 1 >= totalPages} ? 'disabled'">
+                    <a class="page-link" th:href="@{|/crud?page=${currentPage + 1}|}" aria-label="Következő">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
     </div>
 </section>
