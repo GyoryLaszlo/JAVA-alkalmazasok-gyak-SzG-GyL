@@ -22,13 +22,15 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/database", "/diagram","/crud", "/restful", "/contact", "/register",
+                        .requestMatchers("/", "/database", "/diagram",
+                                "/crud", "/crud/uj", "/crud/ment", "/crud/delete/{id}", "/crud/edit/{id}","/crud/modosit",
+                                "/restful", "/contact", "/register",
                                 "/css/**", "/js/**", "/assets/**", "/webjars/**").permitAll()
                         .requestMatchers("/login", "/register").permitAll()
-                        .requestMatchers(HttpMethod.GET,  "/contact").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/contact").permitAll()
                         .requestMatchers(HttpMethod.POST, "/contact").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/messages/**").hasAnyRole("ADMIN","USER")
+                        .requestMatchers("/messages/**").hasAnyRole("ADMIN", "USER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(f -> f
@@ -62,8 +64,6 @@ public class SecurityConfig {
         );
         return jdbc; // <- UserDetailsManager
     }
-
-
 
 
     @Bean
