@@ -165,10 +165,10 @@ public class PageController {
 //        return (hx != null) ? "fragments/crud :: content" : "layout";
 //    }
 
-    @GetMapping("/restful")
-    public String restful(@RequestHeader(value = "HX-Request", required = false) String hx) {
-        return (hx != null) ? "fragments/restful :: content" : "layout";
-    }
+//    @GetMapping("/restful")
+//    public String restful(@RequestHeader(value = "HX-Request", required = false) String hx) {
+//        return (hx != null) ? "fragments/restful :: content" : "layout";
+//    }
 
     @GetMapping("/admin")
     public String admin(@RequestHeader(value = "HX-Request", required = false) String hx) {

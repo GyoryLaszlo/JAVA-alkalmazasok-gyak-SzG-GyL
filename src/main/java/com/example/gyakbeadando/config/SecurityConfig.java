@@ -26,6 +26,7 @@ public class SecurityConfig {
                                 "/crud", "/crud/uj", "/crud/ment", "/crud/delete/{id}", "/crud/edit/{id}","/crud/modosit",
                                 "/restful", "/contact", "/register",
                                 "/css/**", "/js/**", "/assets/**", "/webjars/**").permitAll()
+                        .requestMatchers("/api/messages", "/api/messages/{id}").permitAll()
                         .requestMatchers("/login", "/register").permitAll()
                         .requestMatchers(HttpMethod.GET, "/contact").permitAll()
                         .requestMatchers(HttpMethod.POST, "/contact").permitAll()
@@ -45,6 +46,7 @@ public class SecurityConfig {
                 )
                 // LÉNYEG: token bekerül cookie-ba és request attribútumba is
                 .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/api/**") // API-hoz nem kell token
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler())
                 );

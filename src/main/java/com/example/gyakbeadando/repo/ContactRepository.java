@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface ContactRepository extends JpaRepository<Contact, Long> {
+public interface ContactRepository extends JpaRepository<Contact, Integer> {
     @Query("SELECT c FROM Contact c ORDER BY c.createdAt DESC")
     List<Contact> findAllMessagesOrderByTimeDesc();
 }
