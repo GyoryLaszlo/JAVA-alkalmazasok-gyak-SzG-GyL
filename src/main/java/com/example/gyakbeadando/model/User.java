@@ -2,8 +2,6 @@ package com.example.gyakbeadando.model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "users")
 public class User {
@@ -14,9 +12,9 @@ public class User {
     private String password;
     private Boolean enabled;
 
-    @OneToMany
+    @OneToOne
     @JoinColumn(name = "username", referencedColumnName = "username")
-    private List<Authority> authorities;
+    private Authority authority;
 
     public String getUsername() {
         return username;
@@ -42,11 +40,11 @@ public class User {
         this.enabled = enabled;
     }
 
-    public List<Authority> getAuthorities() {
-        return authorities;
+    public Authority getAuthority() {
+        return authority;
     }
 
-    public void setAuthorities(List<Authority> authorities) {
-        this.authorities = authorities;
+    public void setAuthorities(Authority authority) {
+        this.authority = authority;
     }
 }
