@@ -11141,3 +11141,7 @@ td span.chip{ white-space:nowrap; }
 #messageTable tbody tr:hover {
     cursor: pointer;
 }
+
+.navbar .nav-link { color:#212529 !important; opacity:1 !important; font-weight:500; }
+.navbar .nav-link:hover, .navbar .nav-link:focus { color:#F4623A !important; text-decoration:none; }
+.navbar .nav-link.active { color:#F4623A !important; }
