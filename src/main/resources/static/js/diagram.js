@@ -21,7 +21,7 @@ function initCpuChart() {
         data: {
             labels: cpuLabels,
             datasets: [{
-                label: 'Átlagár (Ft)',
+                label: 'Átlagár (Pengő)',
                 data: cpuAvgPrices,
                 backgroundColor: ['#f87171', '#60a5fa', '#34d399']
             }]
