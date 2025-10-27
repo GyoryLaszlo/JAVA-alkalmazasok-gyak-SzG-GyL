@@ -19,6 +19,12 @@ public class MessageController {
     public String showMessages(@RequestHeader(value = "HX-Request", required = false) String hx, Model model) {
         List<Contact> messages = messageRepo.findAllMessagesOrderByTimeDesc();
         model.addAttribute("messages", messages);
-        return (hx != null) ? "fragments/messages :: content" : "layout";
+
+        if (hx != null) {
+            return "fragments/messages :: content";
+        } else {
+            model.addAttribute("view", "fragments/messages");
+            return "layout";
+        }
     }
 }

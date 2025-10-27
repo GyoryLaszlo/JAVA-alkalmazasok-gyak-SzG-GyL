@@ -21,6 +21,12 @@ public class DiagramController {
         model.addAttribute("avgPrices", diagramService.getAvgPricesByManufacturer());
         model.addAttribute("osCounts", diagramService.getNotebookCountByOS());
         model.addAttribute("displayCounts", diagramService.getNotebookCountByDisplaySize());
-        return (hx != null) ? "fragments/diagram :: content" : "layout";
+
+        if (hx != null) {
+            return "fragments/diagram :: content";
+        } else {
+            model.addAttribute("view", "fragments/diagram");
+            return "layout";
+        }
     }
 }
